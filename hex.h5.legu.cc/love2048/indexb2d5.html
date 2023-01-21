@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+  
+<!-- Mirrored from hex.h5.legu.cc/love2048/?td_channelid=hex by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Jan 2023 13:24:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="format-detection"content="telephone=no, email=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=8">
+	<meta http-equiv="Expires" content="0">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-control" content="no-cache">
+	<meta http-equiv="Cache" content="no-cache">
+
+	<title>情侣版2048</title>
+	<link rel="stylesheet" href="styles/autobox_game.min.css">
+	<script src="js/zepto.min.js"></script>
+    <link rel="stylesheet" href="styles/8e1258bb.main.css"/>
+	<link rel="stylesheet" href="../weui/weui.min.css"/>
+	<style>
+.loading1{
+            width: 80px;
+            height: 40px;
+            
+z-index: 99;
+    position: absolute;
+    left: 50%;
+	margin-left:-20px;
+    top: 35%;
+        }
+        .loading1 span{
+            display: inline-block;
+            width: 8px;
+            height: 100%;
+            border-radius: 4px;
+            background: lightgreen;
+            -webkit-animation: load 1s ease infinite;
+        }
+        @-webkit-keyframes load{
+            0%,100%{
+                height: 40px;
+                background: lightgreen;
+            }
+            50%{
+                height: 70px;
+                margin: -15px 0;
+                background: lightblue;
+            }
+        }
+        .loading span:nth-child(2){
+            -webkit-animation-delay:0.2s;
+        }
+        .loading span:nth-child(3){
+            -webkit-animation-delay:0.4s;
+        }
+        .loading span:nth-child(4){
+            -webkit-animation-delay:0.6s;
+        }
+        .loading span:nth-child(5){
+            -webkit-animation-delay:0.8s;
+        }
+	</style>
+  </head>
+  <body>
+ <div style="position: absolute;left:-1000px;top:-1000px;"><img src="icon.jpg" /></div>
+
+ <div id="adlink" onclick="location.href='../index.html'" style="position:absolute;z-index:2;left:0;bottom:0;color:#ccc;font-size:80%;width:100%;text-align: center;line-height:2em;background:rgba(0,0,0,0.5);;">玩累了？来试试同样停不下来的<span style="color:#39ffa4">[六角消除]</span>吧！</div>
+
+<script type="text/javascript">
+var config_info         = {
+    "is_debug": true,
+    "share_button": 0,
+    "more_button": 1,
+    "permit_start": true,
+    "page_source": "autobox",
+    "is_ad": false,
+    //"downloadbutton_stat_url": "http:\/\/autobox.meiriq.com\/downloadbutton\/6\/706e17bd",
+    "is_weixin": false,
+    //"load_stat_url": "http:\/\/autobox.meiriq.com\/loadstat\/6\/706e17bd\/partner",
+    "weixin_rank": false,
+    "protocolShare": false,
+    "protocolPutscore": false,
+    "more_link": "http:\/\/h5.play.cn\/",
+    //"post_score_url": "http:\/\/autobox.meiriq.com\/postscore\/6\/706e17bd\/partner",
+    //"weixin_config_url": "http:\/\/autobox.meiriq.com\/wxconfig"
+};
+var csrf_token          = '5TpZrIEHxznAiHarQQD6lOxfCquPXSJS0JnrQWal';
+var gameID              = 6;
+var gameTitle           = '情侣版2048';
+var gameIconUrl         = 'http://meiriq-static.b0.upaiyun.com/gameslibrary/storage/uploads/20150123/ccb396d5.png';
+var gameDetail          = 'XXOO隐藏情节，一般人我不告诉他。 ';
+var gameResult          = '我玩到{score}，据说有XXOO隐藏情节，一般人我不告诉他。 ';
+var gameLink            = 'http://autobox.meiriq.com/source/6/706e17bd/share';
+var fiframe             = '';
+var gameOrientation     = 0;
+</script>
+<!-- <script src="http://meiriq-static.b0.upaiyun.com/autobox/js/autobox_game.min.js?v20150801"></script> -->
+<script src="js/autobox_game.min0e66.js?v20151225"></script>
+
+
+<script type="text/javascript">
+function cb_menu_more() {
+    config_info.is_debug === !0 && console.log("menu_more"),
+    //$.get(meiriq_stat.menu_more_url),
+    void 0 !== window.my_menu_more && window.my_menu_more()
+}
+function cb_quit() {
+    config_info.is_debug === !0 && console.log("cb_quit"),
+    //$.get(meiriq_stat.quit_url),
+    void 0 !== window.my_quit && window.my_quit()
+}
+var buttoncount = 0;
+cb_start = function() {
+    return config_info.is_debug === !0 && console.log("cb_start"),
+    //0 === buttoncount && ($.get(meiriq_stat.start_url), buttoncount++),
+    //void 0 !== window.my_start && window.my_start(),
+    this.permitStart
+},
+cb_gameover = function(a) {
+    //return type = meiriq_game.gameType,
+    //value = a,
+    //config_info.is_debug === !0 && console.log("cb_gameover,\u7c7b\u578b\u662f:" + type + ",\u503c\u4e3a:" + value),
+    //buttoncount = 0,
+    //$.get(meiriq_stat.playtimes_url),
+    //void 0 !== window.my_post_score ? window.my_post_score(a) : 1
+},
+cb_levelwin = function(a) {
+    config_info.is_debug === !0 && console.log("cb_levelwin"),
+    //$.get(meiriq_stat.levelwin_url),
+    this.updateScore(a),
+    void 0 !== window.my_levelwin && window.my_levelwin(a)
+},
+cb_finishload = function() {
+    config_info.is_debug === !0 && console.log("cb_finishload"),
+    //$.get(meiriq_stat.finishload_url),
+    void 0 !== window.my_finishload && window.my_finishload()
+},
+cb_restart = function() {
+    config_info.is_debug === !0 && console.log("cb_restart"),
+    //$.get(meiriq_stat.restart_url),
+    void 0 !== window.my_restart && window.my_restart();
+
+	localStorage['bombSteps'] = 0;
+	localStorage['bombTimes'] = 0;
+	reLiveTimes = 0;
+	$('#steps').html(localStorage['bombSteps']||0);
+
+},
+cb_share = function() {
+    //config_info.is_debug === !0 && console.log("cb_share"),
+    //0 === buttoncount && ($.get(meiriq_stat.share_url), buttoncount++),
+   // void 0 !== window.my_share && window.my_share()
+},
+cb_more = function() {
+    config_info.is_debug === !0 && console.log("cb_more"),
+    //$.get(meiriq_stat.more_url),
+    void 0 !== window.my_more && window.my_more()
+};
+</script>
+<!-- <script src="http://meiriq-static.b0.upaiyun.com/gameslibrary/publicfile/meiriq_base_old.min.js?v=201505190935"></script> -->
+
+<div class="loading1" id="loading1" style="display:none">
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+	</div>
+
+
+    <div id="game_2048" class="container">
+      <div class="heading">
+        <h1 class="title">情侣版2048</h1>
+        <div class="scores-container">
+          <div class="score-container">0</div>
+          <div class="best-container">0</div>
+        </div>
+      </div>
+      <div class="above-game" style="margin-top:5px;">
+        <p class="game-intro">从搭讪开始，2次搭讪等于1次暧昧<br/>2次暧昧等于1次约会，你多久能那啥呢...</p>
+      </div>
+      <div class="game-container" style="margin-top:5px;">
+        <div class="game-message">
+          <p></p>
+          <div class="lower">
+            <a id="keep-playing-button" class="keep-playing-button">继续</a>
+            <a id="retry-button" class="retry-button" style="display:none">分享</a>
+            <a id="more" class="more" onclick="alert('暂未开放')">更多</a>
+          </div>
+		  <span><br/>分享到朋友圈和朋友比一比吧！</span>
+        </div>
+        <div class="grid-container">
+          <div class="grid-row">
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+          </div>
+          <div class="grid-row">
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+          </div>
+          <div class="grid-row">
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+          </div>
+          <div class="grid-row">
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+          </div>
+        </div>
+        <div class="tile-container"></div>
+      </div>
+	  <div><span class="game-intro"><img src="images/zhadan.png" width="32px" />快速点击格子两次可炸掉</span>  <span style="float:right">进行了<span id="steps">0</span>步</span></div>
+    </div>
+
+    <!--div id="bg-block"></div-->
+    
+
+    <script src="js/minb602.js?_=1234"></script>
+ 
+    
+    <script type="text/javascript">
+      var _my_list = {
+          "0": "单身",
+          "2": "搭讪",
+          "4": "暧昧",
+          "8": "约会",
+          "16": "表白",
+          "32": "恋爱",
+          "64": "牵手",
+          "128": "拥抱",
+          "256": "接吻",
+          "512": "爱爱",
+          "1024": "求婚",
+          "2048": "蜜月",
+          "4096": "相濡以沫",
+		  "8192": "天荒地老"
+        };
+		var _my_index = {
+		  "0": "0",
+          "2": "①",
+          "4": "②",
+          "8": "③",
+          "16": "④",
+          "32": "⑤",
+          "64": "⑥",
+          "128": "⑦",
+          "256": "⑧",
+          "512": "⑨",
+          "1024": "⑩",
+          "2048": "⑪",
+          "4096": "⑫",
+		  "8192": "⑬",
+		};
+      var _my_mark = {
+          "0": "屌丝还是洗洗睡吧！",
+          "2": "搭讪失败？别拿板砖当道具啦！",
+          "4": "暧昧是把双刃剑，大声说出爱吧！",
+          "8": "约会失败？是你不够主动吧！",
+          "16": "没关系，失败是成功的妈妈！",
+          "32": "恋爱告吹，挥手别说再见！",
+          "64": "牵手失败？心急吃不了热豆腐！",
+          "128": "折在拥抱上，该减肥了吧！",
+          "256": "再多学一点接吻技巧吧！",
+          "512": "厄，这个我也帮不了你！",
+          "1024": "没点创意，怎能轻易答应！",
+          "2048": "终于等到你，还好我没放弃！",
+          "4096": "相濡以沫，人生最美不过如此！",
+		  "8192": "不可思议的天长地久！"
+        };
+      var _my_goal = 2048;
+      var _my_win  = "恭喜踏上蜜月旅程，还没完喔~";
+
+      
+
+      document.body.addEventListener("touchmove", function (i) {
+        event.preventDefault(); // 禁止 iOS 下拉
+      });
+
+      $().ready(function() {
+        if (androidVersion < 4) {
+          $('head').append("<link rel='stylesheet' href='http://99.h5gwyx.sinaapp.com/resource/css/android2.min.css'>");
+        }
+        window.requestAnimationFrame(function() {
+          window.gameMana = new GameManager(4, KeyboardInputManager, HTMLActuator, LocalStorageManager);
+          setTimeout(function(){
+              cb_finishload();
+              cb_start();
+          }, 1000);
+          
+        });
+        $('#game_2048').show();
+      });
+    </script>
+    
+    <script type="text/javascript">
+      //数据
+      var _best_score = {"score":"单身","score_number":0};
+
+      function  start () {
+        gostart.restart();
+      }
+
+	  /*
+      if (haveShare==0&&haveGamelist==1) {
+        document.getElementById('retry-button').style.display = 'none';
+        document.getElementById('more').style.display = 'inline-block';
+      };
+      if (haveShare==0&&haveGamelist==0) {
+        document.getElementById('retry-button').style.display = 'none';
+        document.getElementById('more').style.display = 'none';
+      };
+      if (haveShare==1) {
+        document.getElementById('more').style.display = 'none';
+      };
+	  */
+
+      document.getElementById('more').onclick = function(){
+        cb_more();
+      }
+
+	function myconfirm(conf){
+
+		window._myconfirmDoFun = window._myconfirmDoFun || function(confirmIndex,btnIdx){
+			var conf = myconfirmConf['c'+confirmIndex];
+			conf.btns[btnIdx].fun && conf.btns[btnIdx].fun();
+			
+			delete myconfirmConf['c'+confirmIndex];
+			$('.weui_dialog_confirm').remove();
+		};
+
+		window.confirmIndex = window.confirmIndex || 0;
+		confirmIndex++;
+		window.myconfirmConf = window.myconfirmConf || {};
+		myconfirmConf['c'+confirmIndex] = conf;
+
+		var html = '<div class="weui_dialog_confirm" style="position: absolute;z-index:9999999;width:100%;height:100%;top:0;left:0;">\
+			<div class="weui_mask"></div>\
+			<div class="weui_dialog">\
+				<div class="weui_dialog_hd"><strong class="weui_dialog_title">'+ conf['title'] +'</strong></div>\
+				<div class="weui_dialog_bd">'+ conf['cont'] +'</div>\
+				<div class="weui_dialog_ft">';
+					
+					for(var i=0;i<conf.btns.length;i++){
+						html += '<a href="javascript:_myconfirmDoFun('+confirmIndex+','+i+');" class="weui_btn_dialog default">'+ conf.btns[i].title +'</a>';
+
+					}
+				html+='</div>\
+			</div>\
+		</div>';
+		$('body').append(html);
+	  }
+	
+	var reLiveTimes = localStorage['bombTimes']||0;
+	var openid = '';
+
+	function money(){
+		var m = [1,2,4,8,16,30,30,30,30,30];
+		var v = m[reLiveTimes];
+		if(v==null)v=30;
+		return v;
+	}
+	
+	function moveStep(){
+		var s = localStorage['bombSteps']||0;
+		s++;
+		$('#steps').html(s);
+		localStorage['bombSteps'] = s;
+	}
+	$('#steps').html(localStorage['bombSteps']||0);
+
+	function bombTile(o){
+		var p = $(o).parent();
+		var pos = $(p).data('position');
+
+		myconfirm({
+			title:"提示",
+			cont:"是否花费"+ money() +"元炸掉这个格子？",
+			btns : [
+				{title:"确定",fun:function(){
+					//
+					if(openid==''){
+						alert('微信中进入时才可执行该操作');
+					}else{
+						document.getElementById('loading1').style.display="";
+						setTimeout(function(){
+							document.getElementById('loading1').style.display="none";
+						},5000);
+
+						var _yuanmoney = money();
+						var _money = (money()*100);
+						var url = "../pingxx8752.html?act=pay&amp;openid="+openid+"&money="+ _money+"&itemname="+encodeURIComponent('情侣2048炸弹');
+						
+						$.get(url,function(vv) {
+							document.getElementById('loading1').style.display="none";
+							var data = JSON.parse(vv);
+								
+							pingpp.createPayment(data, function(result, err) {
+								if (result=="success") {
+									reLiveTimes++;
+									localStorage['bombTimes'] = reLiveTimes;
+									removeTile(pos);
+								} else {
+
+								}
+							});
+						});
+					}
+				}},
+				{title:"取消",fun:function(){
+					
+				}}
+			]
+		});
+	}
+
+	function removeTile(a){
+		gameMana.grid.removeTile(a);
+		gameMana.storageManager.setGameState(gameMana.serialize());
+		gameMana.setup();
+	}
+
+    </script>
+	<script src="../pingpp.js"></script>
+    <script src="http://sdk.talkingdata.com/app/h5/v1?appid=1B6B6A22234D01D18A06B563AD6C6E0A&amp;vn=1.0&amp;vc=1.0"></script> 
+  </body>
+
+<!-- Mirrored from hex.h5.legu.cc/love2048/?td_channelid=hex by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Jan 2023 13:24:29 GMT -->
+</html>
